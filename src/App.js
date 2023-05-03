@@ -12,11 +12,11 @@ import './App.css';
 window.process = {}
 
 // const app = new Clarifai.App({
-//     apiKey: 'cb36b4e48506454ea45691a48f2b5fc0'
+//     apiKey: 'YOUR API KEY HERE'
 //   }); 
 
 const returnClarifaiRequestOptions = (imageUrl) => {
-  const PAT = 'ae44b431db894987991d245d60119c74';
+  const PAT = 'Personal Access Token';
   const USER_ID = 'nicolehawkey';       
   const APP_ID = 'my-first-application';
   const IMAGE_URL = imageUrl;
@@ -41,7 +41,7 @@ const returnClarifaiRequestOptions = (imageUrl) => {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Authorization': 'Key ' + 'ae44b431db894987991d245d60119c74'
+            'Authorization': 'Key ' + 'Personal Access Token'
         },
         body: raw
 };
