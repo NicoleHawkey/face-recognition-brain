@@ -11,44 +11,6 @@ import './App.css';
 
 window.process = {}
 
-// const app = new Clarifai.App({
-//     apiKey: 'YOUR API KEY HERE'
-//   }); 
-
-const returnClarifaiRequestOptions = (imageUrl) => {
-  const PAT = 'Personal Access Token';
-  const USER_ID = 'nicolehawkey';       
-  const APP_ID = 'my-first-application';
-  const IMAGE_URL = imageUrl;
-
-  const raw = JSON.stringify({
-    "user_app_id": {
-      "user_id": "clarifai",
-      "app_id": "main"
-    },
-    "inputs": [
-        {
-            "data": {
-                "image": {
-                    "url": imageUrl
-                }
-            }
-        }
-    ]
-  });
-  
-  const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Key ' + 'Personal Access Token'
-        },
-        body: raw
-};
-
-return requestOptions;
-};
-
 const initialState = {
     input: '',
     imageUrl: '',
@@ -103,9 +65,22 @@ class App extends Component {
     
   onButtonSubmit = () => {
    this.setState({ imageUrl: this.state.input });
-    fetch(`https://api.clarifai.com/v2/models/face-detection/versions/6dc7e46bc9124c5c8824be4822abe105/outputs`, returnClarifaiRequestOptions(this.state.input))
-        .then(response => response.json())
-          .then(response => {
+    // fetch(`https://api.clarifai.com/v2/models/face-detection/versions/6dc7e46bc9124c5c8824be4822abe105/outputs`, returnClarifaiRequestOptions(this.state.input))
+      fetch('http://localhost:2000/imageurl', {
+        method: 'post',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+        input: this.state.input
+        })
+      })
+      // .then(response => {
+      //   console.log(response);
+      //   return response.json();
+      // })
+      .then(response => response.json())
+      .then(response => {
+        console.log('hi', response)
+          // .then(response => {
             if (response) {
               fetch('http://localhost:2000/image', {
                 method: 'put',
