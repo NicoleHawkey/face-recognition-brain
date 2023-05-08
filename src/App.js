@@ -73,14 +73,8 @@ class App extends Component {
         input: this.state.input
         })
       })
-      // .then(response => {
-      //   console.log(response);
-      //   return response.json();
-      // })
       .then(response => response.json())
       .then(response => {
-        console.log('hi', response)
-          // .then(response => {
             if (response) {
               fetch('http://localhost:2000/image', {
                 method: 'put',
