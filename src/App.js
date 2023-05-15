@@ -66,7 +66,7 @@ class App extends Component {
   onButtonSubmit = () => {
    this.setState({ imageUrl: this.state.input });
     // fetch(`https://api.clarifai.com/v2/models/face-detection/versions/6dc7e46bc9124c5c8824be4822abe105/outputs`, returnClarifaiRequestOptions(this.state.input))
-      fetch('https://back-end-api-9p21.onrender.com/imageurl', {
+      fetch('http://localhost:2000/imageurl', {
         method: 'post',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify({
@@ -76,7 +76,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
             if (response) {
-              fetch('https://back-end-api-9p21.onrender.com/image', {
+              fetch('http://localhost:2000/image', {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
